@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zono Food</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h1>Zono Food</h1>
+    <div class="restaurant-buttons">
+        <button onclick="showDishes('res1')">Restaurant 1</button>
+        <button onclick="showDishes('res2')">Restaurant 2</button>
+    </div>
+    <div id="dish-list"></div>
+    <h2>Total Amount: $<span id="totalAmount">0</span></h2>
+    <script>const dishes = {
+        res1: [
+            { name: "Pasta", price: 10 },
+            { name: "Pizza", price: 12 },
+            { name: "Salad", price: 8 }
+        ],
+        res2: [
+            { name: "Burger", price: 8 },
+            { name: "Fries", price: 4 },
+            { name: "Soda", price: 2 }
+        ]
+    };
+    
+    let totalAmount = 0;
+    
+    function showDishes(restaurant) {
+        const dishList = document.getElementById("dish-list");
+        dishList.innerHTML = ""; // Clear previous dishes
+    
+        dishes[restaurant].forEach(dish => {
+            const dishItem = document.createElement("div");
+            dishItem.className = "dish";
+            dishItem.innerHTML = `${dish.name} - $${dish.price} 
+                <button onclick="addToTotal(${dish.price})">Add</button>`;
+            dishList.appendChild(dishItem);
+        });
+    }
+    
+    function addToTotal(price) {
+        totalAmount += price;
+        document.getElementById("totalAmount").innerText = totalAmount;
+    }
+    </script>
+</body>
+</html>
